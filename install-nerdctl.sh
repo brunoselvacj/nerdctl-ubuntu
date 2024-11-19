@@ -17,13 +17,16 @@
 
 set -e
 
+# Enable systemd user lingering for persistent services
+sudo loginctl enable-linger "$USER"
+
+# Detect system architecture
+TOOLS_ARCH=$(dpkg --print-architecture)
+
 # Install required packages
 sudo apt update && sudo apt install -y \
 containerd \
 rootlesskit
-
-# Detect system architecture
-TOOLS_ARCH=$(dpkg --print-architecture)
 
 # Install CNI plugins
 CNI_VERSION="v1.3.0"
@@ -78,9 +81,6 @@ sudo tee /etc/cni/net.d/10-containerd-net.conflist > /dev/null << 'EOF'
   ]
 }
 EOF
-
-# Enable systemd user lingering for persistent services
-sudo loginctl enable-linger "$USER"
 
 # Initialize rootless containerd
 containerd-rootless-setuptool.sh install
