@@ -139,7 +139,14 @@ EOF
 
 echo "Testing BuildKit with a simple build..."
 if nerdctl build -t buildkit-test . && nerdctl run --rm buildkit-test; then
-    echo "BuildKit validation successful!"
+    echo
+    echo "╔════════════════════════════════╗"
+    echo "║   BuildKit Test Results        ║"
+    echo "╚════════════════════════════════╝"
+    echo "✓ Image built successfully"
+    echo "✓ Container test passed"
+    echo "✓ BuildKit validation successful"
+    echo
 else
     echo "BuildKit validation failed. Please check the logs:"
     echo "systemctl --user status buildkit"
@@ -152,13 +159,17 @@ cd - >/dev/null
 rm -rf "$TEST_DIR"
 
 # Cleanup test images
-echo "Cleaning up test images..."
+echo
+echo ">> Cleaning Up Resources"
 nerdctl system prune --all --force
 
-echo "Installation and validation complete!"
-echo "You can now use 'nerdctl' or 'docker' commands."
+echo
+echo ">> Installation Complete"
+echo "✓ All components installed successfully"
+echo "✓ You can now use 'nerdctl' or 'docker' commands"
+echo
 echo "For troubleshooting, check:"
-echo "  * systemctl --user status containerd"
-echo "  * systemctl --user status buildkit"
-echo "  * journalctl --user -u containerd"
-echo "  * journalctl --user -u buildkit"
+echo "  • systemctl --user status containerd"
+echo "  • systemctl --user status buildkit"
+echo "  • journalctl --user -u containerd"
+echo "  • journalctl --user -u buildkit"
