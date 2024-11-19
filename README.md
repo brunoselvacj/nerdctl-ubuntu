@@ -22,7 +22,7 @@ Automated setup script for rootless container environment using containerd, nerd
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/nerdctl-ubuntu.git
+git clone https://github.com/brunoselvacj/nerdctl-ubuntu.git
 cd nerdctl-ubuntu
 
 # Make script executable
