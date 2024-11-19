@@ -151,6 +151,10 @@ fi
 cd - >/dev/null
 rm -rf "$TEST_DIR"
 
+# Cleanup test images
+echo "Cleaning up test images..."
+nerdctl system prune --force
+
 echo "Installation and validation complete!"
 echo "You can now use 'nerdctl' or 'docker' commands."
 echo "For troubleshooting, check:"
