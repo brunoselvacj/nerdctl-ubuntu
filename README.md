@@ -32,6 +32,12 @@ chmod +x install-nerdctl.sh
 ./install-nerdctl.sh
 ```
 
+## Quick Install
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/brunoselvacj/nerdctl-ubuntu/main/install-nerdctl.sh | bash
+```
+
 ## Usage
 
 ```bash

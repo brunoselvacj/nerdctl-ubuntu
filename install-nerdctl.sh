@@ -17,6 +17,20 @@
 
 set -e
 
+# Print welcome message
+echo "╔════════════════════════════════════════════╗"
+echo "║     Rootless Container Setup for Ubuntu    ║"
+echo "╚════════════════════════════════════════════╝"
+echo
+echo "This script will install:"
+echo "  • containerd (v1.7.x) - Container runtime"
+echo "  • nerdctl (v2.0.0) - Docker-compatible CLI"
+echo "  • BuildKit (v0.17.1) - Container builder"
+echo "  • CNI (v1.3.0) - Container networking"
+echo
+echo "Starting installation..."
+echo
+
 # Enable systemd user lingering for persistent services
 sudo loginctl enable-linger "$USER"
 
