@@ -140,9 +140,8 @@ EOF
 echo "Testing BuildKit with a simple build..."
 if nerdctl build -t buildkit-test . && nerdctl run --rm buildkit-test; then
     echo
-    echo "╔════════════════════════════════╗"
-    echo "║   BuildKit Test Results        ║"
-    echo "╚════════════════════════════════╝"
+    echo ">> BuildKit Test Results"
+    echo
     echo "✓ Image built successfully"
     echo "✓ Container test passed"
     echo "✓ BuildKit validation successful"
@@ -161,10 +160,12 @@ rm -rf "$TEST_DIR"
 # Cleanup test images
 echo
 echo ">> Cleaning Up Resources"
+echo
 nerdctl system prune --all --force
 
 echo
 echo ">> Installation Complete"
+echo
 echo "✓ All components installed successfully"
 echo "✓ You can now use 'nerdctl' or 'docker' commands"
 echo
