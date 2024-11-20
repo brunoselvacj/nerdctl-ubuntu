@@ -39,8 +39,8 @@ TOOLS_ARCH=$(dpkg --print-architecture)
 
 # Install required packages
 sudo apt update && sudo apt install -y \
-containerd \
-rootlesskit
+  containerd \
+  rootlesskit
 
 # Install CNI plugins
 CNI_VERSION="v1.3.0"
@@ -62,7 +62,7 @@ rm "nerdctl-${NERDCTL_VERSION#v}-linux-${TOOLS_ARCH}.tar.gz"
 # - Port mapping
 # - Firewall rules
 sudo mkdir -p /etc/cni/net.d
-sudo tee /etc/cni/net.d/10-containerd-net.conflist > /dev/null << 'EOF'
+sudo tee /etc/cni/net.d/10-containerd-net.conflist >/dev/null <<'EOF'
 {
   "cniVersion": "1.0.0",
   "name": "containerd-net",
@@ -122,16 +122,16 @@ nerdctl run --rm hello-world
 # Validate BuildKit installation
 echo "Validating BuildKit installation..."
 if ! systemctl --user is-active buildkit >/dev/null 2>&1; then
-    echo "BuildKit service is not running. Starting it..."
-    systemctl --user start buildkit
-    sleep 2
+  echo "BuildKit service is not running. Starting it..."
+  systemctl --user start buildkit
+  sleep 2
 fi
 
 # Test BuildKit with a simple build
 TEST_DIR=$(mktemp -d)
 cd "$TEST_DIR"
 
-cat > Dockerfile << 'EOF'
+cat >Dockerfile <<'EOF'
 FROM alpine:latest
 RUN echo "BuildKit test successful!" > /test.txt
 CMD cat /test.txt
@@ -139,18 +139,18 @@ EOF
 
 echo "Testing BuildKit with a simple build..."
 if nerdctl build -t buildkit-test . && nerdctl run --rm buildkit-test; then
-    echo
-    echo ">> BuildKit Test Results"
-    echo
-    echo "✓ Image built successfully"
-    echo "✓ Container test passed"
-    echo "✓ BuildKit validation successful"
-    echo
+  echo
+  echo ">> BuildKit Test Results"
+  echo
+  echo "✓ Image built successfully"
+  echo "✓ Container test passed"
+  echo "✓ BuildKit validation successful"
+  echo
 else
-    echo "BuildKit validation failed. Please check the logs:"
-    echo "systemctl --user status buildkit"
-    echo "journalctl --user -u buildkit"
-    exit 1
+  echo "BuildKit validation failed. Please check the logs:"
+  echo "systemctl --user status buildkit"
+  echo "journalctl --user -u buildkit"
+  exit 1
 fi
 
 # Cleanup test files
